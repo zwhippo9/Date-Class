@@ -1,6 +1,9 @@
 #include "date.h"
 #include <iostream>
 #include <stdexcept>
+#include <ctime>
+#include <cmath>
+
 
 //help check for leap year
 bool Date::isLeapYear(int year) const {
@@ -107,25 +110,40 @@ Date Date::operator--(int){
     return temp;
 }
 
+//subtraction operator
 int Date::operator-(const Date& other) const{
-    return 0;
+    std::tm tm1 = {0};
+    tm1.tm_mday = day;
+    tm1.tm_mon = month - 1;
+    tm1.tm_year = year - 1900;
+
+    std::tm tm2 = {0};
+    tm2.tm_mday = other.day;
+    tm2.tm_mon = other.month - 1; 
+    tm2.tm_year = other.year - 1900;
+
+    std::time_t time1 = std::mktime(&tm1);
+    std::time_t time2 = std::mktime(&tm2);
+
+    return std::difftime(time1, time2) / (60 * 60 * 24);
 }
 
 //stream
-std::ostream& operaot<<(std::ostream& os, const Date& date) {
+std::ostream& operator<<(std::ostream& os, const Date& date) {
     date.printFormat2();
-    return os:
+    return os;
 }
 
 std::istream& operator>>(std::istream& is, Date& date) {
-              int m, d, y;
-              std::cout << "Enter a date (month day year): ";
-              is >> m >> d >> y;
-              try {
-                  date.setDate(m, d, y);
-              } catch (const std::invalid_argument&) {
-                  std::cout << "Invalid date!" << std::endl;
-                  is.setstate(std::ios::failbit); 
+    int m, d, y;
+    std::cout << "Enter a date (month day year): ";
+    is >> m >> d >> y;
+    try {
+        date.setDate(m, d, y);
+    } catch (const std::invalid_argument&) {
+        std::cout << "Invalid date!" << std::endl;
+        is.setstate(std::ios::failbit); 
+
   }
   return is;
 }

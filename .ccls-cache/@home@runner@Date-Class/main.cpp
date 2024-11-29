@@ -47,29 +47,29 @@ int main() {
 
   Date date5(2, 2, 2006);
   Date date6(11, 10, 2003);
-  std::cout << "Days between 2/2/2006 and 11/10/2003: " << date5 - date6 << " days" << std::endl;\
+  std::cout << "Days between 2/2/2006 and 11/10/2003: " << date5 - date6 << " days" << std::endl;
 
   //test 9 and 10, pre increment and post increment
   Date date7(2, 29, 2008);
   --date7;
-  std::cout << "After Pre-Decrement (Format 3): ";
+  std::cout << "After Pre-Decrement : ";
   date7.printFormat3();
   std::cout << std::endl;
 
   ++date7;
-  std::cout << "After Pre-Increment (Format 3): ";
+  std::cout << "After Pre-Increment : ";
   date7.printFormat3();
   std::cout << std::endl;
 
   // test 11, 12, 13, 14 - pre increment and post decrement
   Date date8(12, 31, 2024);
   date8--;  // Post-decrement
-  std::cout << "After Post-Decrement (Format 3): ";
+  std::cout << "After Post-Decrement : ";
   date8.printFormat3();
   std::cout << std::endl;
 
   date8++;  // Post-increment
-  std::cout << "After Post-Increment (Format 3): ";
+  std::cout << "After Post-Increment : ";
   date8.printFormat3();
   std::cout << std::endl;
 
